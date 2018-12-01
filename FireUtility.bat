@@ -436,7 +436,7 @@ goto UNIVERSAL
 
 
 
-:GEN6
+:GEN7
 
 echo installing google services...
 echo [*-*] Installing Google Account Manager 1 of 7
@@ -519,7 +519,7 @@ adb\adb.exe install apps/Nova.apk
 
 echo [*-*] Install a "broken" Firelauncher 3 of 4.
 Call :Download com.amazon.firelauncher.apk "https://www.dropbox.com/s/ooiva5s9f57rccf/com.amazon.firelauncher.apk?dl=1"
-adb install -r -d apps/com.amazon.firelauncher.apk
+adb\adb install -r -d apps/com.amazon.firelauncher.apk
 
 
 echo [*-*] Enable use of widgets with Nova 4 of 4.
@@ -585,39 +585,41 @@ echo.---------------------------------------------------------------------------
 )
 echo enabling sideloading apps...
 adb\adb.exe shell settings put secure install_non_market_apps 1
-pause >nul
 
 if '%Choice%' =='E' (
-set Sonos='y'
-set Harmony='y'
-set Spotify='y'
-set LANnouncer='y'
+set Sonos=y
+set Harmony=y
+set Spotify=y
+set LANnouncer=y
 
 )
+
 echo [*-*] Waiting for Device
 adb\adb.exe wait-for-device
 
-if '%LANnouncer%' == 'y'( 
+echo %LANnouncer%
+
+if %LANnouncer% == y ( 
 echo [*-*] Installing LANnouncer.
 Call :Download LANnouncer.apk "https://www.dropbox.com/s/0xazouiy2cef2f2/LANnouncer.apk?dl=1"
 adb\adb.exe install apps/LANnouncer.apk
 )
 
-if '%Spotify%' == 'y'( 
+if %Spotify% == y ( 
 
 echo [*-*] Installing Spotify.
 Call :Download spotify.apk "https://www.dropbox.com/s/1zf1tsyttidz6t4/spotify.apk?dl=1"
 adb\adb.exe install apps/spotify.apk
 )
 
-if '%Harmony%' == 'y'( 
+if %Harmony% == y ( 
 
 echo [*-*] Installing Harmony.
 Call :Download harmony.apk "https://www.dropbox.com/s/mj8fhnfsk3evqur/harmony.apk?dl=1"
 adb\adb.exe install apps/harmony.apk
 )
 
-if '%Sonos%' == 'y'( 
+if %Sonos% == y ( 
 
 echo [*-*] Installing Sonos.
 Call :Download  sonos.apk "https://www.dropbox.com/s/3slydgfuoqmzuce/sonos.apk?dl=1"
